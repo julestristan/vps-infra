@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  blog:
+    image: ghost:5-alpine
+    container_name: mon_blog
+    restart: always
+    environment:
+      # Indique à Ghost son adresse publique
+      url: https://julestristan.fr
+      NODE_ENV: production
+    volumes:
+      # Sauvegarde les données du blog (images, articles, thèmes) sur ton VPS
+      - ./content:/var/lib/ghost/content
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      # Règle pour diriger le domaine principal (et www) vers ce conteneur
+      - "traefik.http.routers.blog.rule=Host(`julestristan.fr`) || Host(`www.julestristan.fr`)"
+      - "traefik.http.routers.blog.entrypoints=websecure"
+      - "traefik.http.routers.blog.tls.certresolver=myresolver"
+      # Port interne utilisé par Ghost
+      - "traefik.http.services.blog.loadbalancer.server.port=2368"
+
+networks:
+  web:
+    external: true

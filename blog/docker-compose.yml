@@ -1,16 +1,15 @@
-version: '3.8'
-
 services:
   blog:
     image: ghost:5-alpine
     container_name: mon_blog
     restart: always
     environment:
-      # Indique à Ghost son adresse publique
       url: https://julestristan.fr
+      database__client: sqlite3
+      database__connection__filename: /var/lib/ghost/content/data/ghost.db
+      database__useNullAsDefault: "true"
       NODE_ENV: production
     volumes:
-      # Sauvegarde les données du blog (images, articles, thèmes) sur ton VPS
       - ./content:/var/lib/ghost/content
     networks:
       - web

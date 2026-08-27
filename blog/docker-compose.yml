@@ -15,11 +15,9 @@ services:
       - web
     labels:
       - "traefik.enable=true"
-      # Règle pour diriger le domaine principal (et www) vers ce conteneur
-      - "traefik.http.routers.blog.rule=Host(`julestristan.fr`) || Host(`www.julestristan.fr`)"
+      - "traefik.http.routers.blog.rule=Host(`julestristan.fr`)"
       - "traefik.http.routers.blog.entrypoints=websecure"
       - "traefik.http.routers.blog.tls.certresolver=myresolver"
-      # Port interne utilisé par Ghost
       - "traefik.http.services.blog.loadbalancer.server.port=2368"
 
 networks:

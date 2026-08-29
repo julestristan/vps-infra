@@ -1,0 +1,8 @@
+*
+
+!/blog/
+!/blog/compose.yaml
+!/traefik/
+!/traefik/compose.yaml
+!/README.md
+!/.gitignore

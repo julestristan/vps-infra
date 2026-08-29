@@ -1,12 +1,10 @@
-version: '3.8'
-
 services:
   traefik:
     image: traefik:v2.11
     container_name: traefik
     restart: always
     command:
-      - "--global.sendanonymoususage=false"
+      - "--global.sendAnonymousUsage=false"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"

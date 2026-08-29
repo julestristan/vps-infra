@@ -20,7 +20,8 @@ services:
       - "traefik.http.routers.blog.middlewares=security-headers@file"
       - "traefik.http.services.blog.loadbalancer.server.port=2368"
     healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:2368/ >/dev/null 2>&1 || exit 1"]
+      # Ghost redirige tout en 301 (url https) ; on considère sain toute réponse < 500.
+      test: ["CMD", "node", "-e", "require('http').get('http://127.0.0.1:2368/',r=>process.exit(r.statusCode<500?0:1)).on('error',()=>process.exit(1))"]
       interval: 30s
       timeout: 10s
       retries: 3

@@ -1,8 +1,12 @@
 *
 
-!/blog/
-!/blog/compose.yaml
+!/.gitignore
+!/README.md
+!/Makefile
 !/traefik/
 !/traefik/compose.yaml
-!/README.md
-!/.gitignore
+!/traefik/dynamic.yml
+!/traefik/.env.example
+!/blog/
+!/blog/compose.yaml
+!/blog/.env.example

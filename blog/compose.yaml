@@ -1,10 +1,9 @@
 services:
-  blog:
-    image: ghost:5-alpine
-    container_name: mon_blog
-    restart: always
+  ghost:
+    image: ghost:5.130.6-alpine
+    restart: unless-stopped
     environment:
-      url: https://julestristan.fr
+      url: ${GHOST_URL}
       database__client: sqlite3
       database__connection__filename: /var/lib/ghost/content/data/ghost.db
       database__useNullAsDefault: "true"
@@ -15,10 +14,18 @@ services:
       - web
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.blog.rule=Host(`julestristan.fr`)"
+      - "traefik.http.routers.blog.rule=Host(`${BLOG_HOST}`)"
       - "traefik.http.routers.blog.entrypoints=websecure"
-      - "traefik.http.routers.blog.tls.certresolver=myresolver"
+      - "traefik.http.routers.blog.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.blog.middlewares=security-headers@file"
       - "traefik.http.services.blog.loadbalancer.server.port=2368"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:2368/ >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    mem_limit: 512m
 
 networks:
   web:

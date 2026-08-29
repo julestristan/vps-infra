@@ -1,0 +1,20 @@
+# Middlewares HTTP security headers
+#   traefik.http.routers.<name>.middlewares=security-headers@file
+http:
+  middlewares:
+    security-headers:
+      headers:
+        stsSeconds: 31536000
+        stsIncludeSubdomains: true
+        stsPreload: true
+        contentTypeNosniff: true
+        referrerPolicy: strict-origin-when-cross-origin
+        # SAMEORIGIN (et non DENY) : le portail membres de Ghost utilise une iframe same-origin
+        customFrameOptionsValue: SAMEORIGIN
+
+# TLS options
+tls:
+  options:
+    default:
+      minVersion: VersionTLS12
+      sniStrict: true

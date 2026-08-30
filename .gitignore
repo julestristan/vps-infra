@@ -3,6 +3,7 @@
 !/.gitignore
 !/README.md
 !/Makefile
+
 !/traefik/
 !/traefik/compose.yaml
 !/traefik/dynamic.yml

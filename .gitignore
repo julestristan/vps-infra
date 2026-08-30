@@ -7,6 +7,6 @@
 !/traefik/compose.yaml
 !/traefik/dynamic.yml
 !/traefik/.env.example
-!/blog/
-!/blog/compose.yaml
-!/blog/.env.example
+
+!/site/
+!/site/README.md

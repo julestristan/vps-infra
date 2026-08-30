@@ -81,3 +81,8 @@ make backup      # archive blog/content dans ./backups (rotation 7 jours)
   puis `make pull && make restart`.
 - Ghost tourne sur SQLite (suffisant pour un blog perso à faible trafic,
   mais hors support officiel — MySQL 8 sinon).
+
+## Security
+
+- **fail2ban** (sshd avec jail: `maxretry = 3`, `bantime = 1d`)
+- **UFW** Seuls les ports `22/tcp` (SSH), `80/tcp` (HTTP) et `443/tcp` (HTTPS) sont ouverts pour l'IP publique

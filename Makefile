@@ -1,4 +1,4 @@
-.PHONY: help net up down restart logs ps pull backup
+.PHONY: help net up down restart logs ps pull
 
 STACKS := traefik blog
 
@@ -24,9 +24,3 @@ ps: ## Container status
 
 logs: ## Check logs for a service
 	@docker compose -f $(or $(S),traefik)/compose.yaml logs -f --tail=100
-
-backup: ## Save Ghost content in ./backups
-	@mkdir -p backups
-	@tar czf backups/ghost-$$(date +%Y%m%d-%H%M%S).tar.gz -C blog content
-	@echo "Sauvegarde écrite dans ./backups"
-	@ls -1t backups/*.tar.gz | tail -n +8 | xargs -r rm  # garde les 7 dernières

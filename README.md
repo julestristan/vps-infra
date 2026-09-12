@@ -79,8 +79,9 @@ make backup      # archive blog/content dans ./backups (rotation 7 jours)
 
 - Images épinglées (`traefik:v3.7.12`, `ghost:5.130.6-alpine`) : bump manuel
   puis `make pull && make restart`.
-- Ghost tourne sur SQLite (suffisant pour un blog perso à faible trafic,
-  mais hors support officiel — MySQL 8 sinon).
+- Ajouter règle firewall IPv6 sur la box pour router les demandes HTTP / HTTPS (voir pour NAT loopback)
+
+![](./img/allow-http&https-firewall.png)
 
 ## Security
 

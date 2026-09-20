@@ -77,8 +77,7 @@ make backup      # archive blog/content dans ./backups (rotation 7 jours)
 
 ## Notes
 
-- Images épinglées (`traefik:v3.7.12`, `ghost:5.130.6-alpine`) : bump manuel
-  puis `make pull && make restart`.
+- Voir pourquoi le routing en interne est bloqué
 - Ajouter règle firewall IPv6 sur la box pour router les demandes HTTP / HTTPS (voir pour NAT loopback)
 
 ![](./img/allow-http&https-firewall.png)

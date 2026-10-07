@@ -1,7 +1,7 @@
 # Infra VPS — julestristan.fr
 
 Stacks Docker Compose du VPS. Reverse-proxy + TLS automatique via Traefik,
-blog Ghost sur la landing page.
+blog basé Hugo sur la landing page.
 
 ```
 .
@@ -34,9 +34,6 @@ make up        # Create "web" internal docker network + run docker services
 make ps
 ```
 
-Traefik obtient les certificats via le challenge TLS-ALPN (port 443).
-Le premier certificat prend quelques secondes ; suivre `make logs S=traefik`.
-
 ## Dashboard Traefik
 
 Exposé uniquement sur `127.0.0.1:8080` (jamais public). Depuis le poste local :
@@ -45,25 +42,6 @@ Exposé uniquement sur `127.0.0.1:8080` (jamais public). Depuis le poste local :
 ssh -L 8080:localhost:8080 <vps>
 # puis http://localhost:8080/dashboard/
 ```
-
-## Basculer staging <-> prod Let's Encrypt
-
-Pour itérer sans risquer les rate-limits : mettre `ACME_CASERVER` sur le
-staging dans `traefik/.env`. Avant de repasser en prod, purger le store
-(les certs staging ne sont pas de confiance) :
-
-```bash
-: > traefik/letsencrypt/acme.json
-make restart
-```
-
-## Sauvegardes
-
-```bash
-make backup      # archive blog/content dans ./backups (rotation 7 jours)
-```
-
-À terme : externaliser (`restic` vers un stockage objet type Backblaze B2).
 
 ## Opérations courantes
 
@@ -79,6 +57,7 @@ make backup      # archive blog/content dans ./backups (rotation 7 jours)
 
 - Voir pourquoi le routing en interne est bloqué
 - Ajouter règle firewall IPv6 sur la box pour router les demandes HTTP / HTTPS (voir pour NAT loopback)
+- Whitelist le port 22 de la box internet pour connexion SSH externe
 
 ![](./img/allow-http&https-firewall.png)
 

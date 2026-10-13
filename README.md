@@ -57,7 +57,7 @@ ssh -L 8080:localhost:8080 <vps>
 
 - Voir pourquoi le routing en interne est bloqué
 - Ajouter règle firewall IPv6 sur la box pour router les demandes HTTP / HTTPS (voir pour NAT loopback)
-- Whitelist le port 22 de la box internet pour connexion SSH externe
+- Whitelist le port 22 de la box internet pour connexion SSH externe (done)
 
 ![](./img/allow-http&https-firewall.png)
 

@@ -59,7 +59,8 @@ ssh -L 8080:localhost:8080 <vps>
 - Ajouter règle firewall IPv6 sur la box pour router les demandes HTTP / HTTPS (voir pour NAT loopback)
 - Whitelist le port 22 de la box internet pour connexion SSH externe (done)
 
-![](./img/allow-http&https-firewall.png)
+![](./img/allow-http&https.png)
+![](./img/allow-ssh.png)
 
 ## Security
 
